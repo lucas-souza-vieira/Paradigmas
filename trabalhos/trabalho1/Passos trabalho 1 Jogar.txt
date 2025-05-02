@@ -1,0 +1,7 @@
+Passos trabalho:
+1: Jogar e entender os 3 problemas.
+2: Escolher um dos problemas
+3: Pensar em uma solução e fazer em c++
+4: Ver um código haskell resolvendo sudoko para aprender
+5: Traduzir de c++ para Haskell
+
