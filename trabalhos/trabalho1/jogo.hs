@@ -11,7 +11,7 @@ data Estado = Estado {
     tamanho :: Int,
     valores :: Matriz Int,
     regiao :: Matriz Char,
-    regioes :: M.Map Char [Coordenada]
+    regioes :: M.Map Char [Coordenada] -- Map que tem a key a região e valor é a lista de coordenadas daquela região
 } deriving Show
 
 -- Verifica se está dentro da matriz e retorna o valor da celula
@@ -97,13 +97,16 @@ jogar est = jogar' est 0 0
                 | otherwise = for xs
 
 
--- Leitura da entrada
-lerMatriz :: Int -> IO (Matriz String)
+-- Le n linhas da entrada e converte cada linha em uma lista de palavras. No final, retorna uma matriz (lista de listas) de String.
+lerMatriz :: Int -> IO [[String]] 
 lerMatriz n = sequence [ fmap words getLine | _ <- [1..n] ]
 
+-- Monta o estado a partir das matrizes
 montarEstado :: Int -> [[String]] -> [[String]] -> Estado
 montarEstado n valStr regStr =
+    -- Tranforma cada string em um numero
     let valMatriz = map (map read) valStr :: Matriz Int
+    -- Pega o primeiro caractere de cada região 
         regMatriz = map (map head) regStr
         -- Cria as cordenadas
         coords = [ (i,j) | i <- [0..n-1], j <- [0..n-1] ]
